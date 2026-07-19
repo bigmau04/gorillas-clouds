@@ -205,25 +205,59 @@ function openGeneralWhatsApp() {
   window.open(url, '_blank');
 }
 
-// Mobile Menu Navigation
+// Mobile Menu Drawer Navigation
 function initMobileMenu() {
   const toggleBtn = document.getElementById('navToggleBtn');
-  const menu = document.getElementById('navMenu');
-  if (toggleBtn && menu) {
+  let overlay = document.getElementById('mobileNavOverlay');
+
+  // Dynamically create mobile nav overlay if not present
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'mobileNavOverlay';
+    overlay.className = 'mobile-nav-overlay';
+    overlay.innerHTML = `
+      <div class="mobile-nav-box">
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar">&times;</button>
+        <img src="img/logo.jpg" alt="Gorillas Clouds" style="width: 50px; height: 50px; border-radius: 50%; margin: 0 auto 1rem; display: block; border: 2px solid var(--accent-mint);">
+        <h4 style="font-family: var(--font-heading); font-weight: 800; font-size: 1.25rem; color: var(--text-dark); margin-bottom: 1.5rem;">Gorillas Clouds</h4>
+        <ul class="mobile-nav-links">
+          <li><a href="#beneficios" onclick="closeMobileNav()">Beneficios THC/THCV</a></li>
+          <li><a href="#catalogo" onclick="closeMobileNav()">Productos & Precios</a></li>
+          <li><a href="#comunidad" onclick="closeMobileNav()">Instagram Oficial</a></li>
+        </ul>
+        <button onclick="openGeneralWhatsApp(); closeMobileNav();" class="btn-hero-primary" style="width: 100%; min-height: 48px;">
+          Contactar en WhatsApp
+        </button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+  }
+
+  if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-      menu.style.flexDirection = 'column';
-      menu.style.position = 'absolute';
-      menu.style.top = '100%';
-      menu.style.left = '0';
-      menu.style.width = '100%';
-      menu.style.background = 'rgba(255, 255, 255, 0.95)';
-      menu.style.padding = '1.5rem';
-      menu.style.borderRadius = '16px';
-      menu.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+      overlay.classList.add('active');
     });
   }
+
+  const closeBtn = document.getElementById('mobileNavClose');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMobileNav);
+  }
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeMobileNav();
+    }
+  });
 }
+
+function closeMobileNav() {
+  const overlay = document.getElementById('mobileNavOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+  }
+}
+
 
 // Smooth Scroll
 function initSmoothScroll() {
