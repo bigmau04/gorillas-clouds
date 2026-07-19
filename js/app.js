@@ -105,7 +105,130 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilterButtons();
   initMobileMenu();
   initSmoothScroll();
+  initGallerySlider();
 });
+
+// Gallery Slider Lightbox Logic with Touch Swipe Gestures
+let currentGalleryIndex = 0;
+
+function initGallerySlider() {
+  const modal = document.getElementById('galleryLightboxModal');
+  const closeBtn = document.getElementById('btnCloseGallery');
+  const prevBtn = document.getElementById('btnGalleryPrev');
+  const nextBtn = document.getElementById('btnGalleryNext');
+  const slideFrame = document.getElementById('gallerySlideFrame');
+
+  if (!modal) return;
+
+  // Open Gallery on Clicking Product Image or Hero Image
+  document.addEventListener('click', (e) => {
+    const prodCard = e.target.closest('.product-card');
+    const heroImgFrame = e.target.closest('.hero-image-frame');
+
+    if (prodCard && e.target.tagName === 'IMG') {
+      const prodId = parseInt(prodCard.dataset.id || '1');
+      const idx = PRODUCTS.findIndex(p => p.id === prodId);
+      openGalleryAt(idx !== -1 ? idx : 0);
+    } else if (heroImgFrame && e.target.tagName === 'IMG') {
+      openGalleryAt(0);
+    }
+  });
+
+  // Buttons Navigation
+  if (prevBtn) prevBtn.addEventListener('click', prevGallerySlide);
+  if (nextBtn) nextBtn.addEventListener('click', nextGallerySlide);
+
+  // Close Navigation
+  if (closeBtn) closeBtn.addEventListener('click', closeGallery);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeGallery();
+  });
+
+  // Keyboard Navigation
+  document.addEventListener('keydown', (e) => {
+    if (modal.classList.contains('hidden')) return;
+    if (e.key === 'ArrowLeft') prevGallerySlide();
+    if (e.key === 'ArrowRight') nextGallerySlide();
+    if (e.key === 'Escape') closeGallery();
+  });
+
+  // Touch Swipe Gestures for Mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  if (slideFrame) {
+    slideFrame.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slideFrame.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+  }
+
+  function handleSwipe() {
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) { // minimum swipe threshold
+      if (diff < 0) {
+        nextGallerySlide(); // swipe left -> next
+      } else {
+        prevGallerySlide(); // swipe right -> prev
+      }
+    }
+  }
+}
+
+function openGalleryAt(index) {
+  const modal = document.getElementById('galleryLightboxModal');
+  if (!modal) return;
+
+  currentGalleryIndex = (index + PRODUCTS.length) % PRODUCTS.length;
+  updateGallerySlide();
+  modal.classList.remove('hidden');
+}
+
+function closeGallery() {
+  const modal = document.getElementById('galleryLightboxModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function nextGallerySlide() {
+  currentGalleryIndex = (currentGalleryIndex + 1) % PRODUCTS.length;
+  updateGallerySlide();
+}
+
+function prevGallerySlide() {
+  currentGalleryIndex = (currentGalleryIndex - 1 + PRODUCTS.length) % PRODUCTS.length;
+  updateGallerySlide();
+}
+
+function updateGallerySlide() {
+  const img = document.getElementById('galleryImg');
+  const title = document.getElementById('galleryTitle');
+  const counter = document.getElementById('galleryCounter');
+  const btnWa = document.getElementById('btnGalleryWa');
+
+  const prod = PRODUCTS[currentGalleryIndex];
+  if (!prod) return;
+
+  if (img) {
+    img.style.opacity = '0.4';
+    img.src = prod.image;
+    img.alt = prod.name;
+    setTimeout(() => { img.style.opacity = '1'; }, 50);
+  }
+
+  if (title) title.innerText = `${prod.name} (${prod.formattedPrice})`;
+  if (counter) counter.innerText = `Imagen ${currentGalleryIndex + 1} de ${PRODUCTS.length}`;
+
+  if (btnWa) {
+    btnWa.onclick = () => {
+      orderProductViaWhatsApp(prod.name, prod.formattedPrice);
+    };
+  }
+}
+
 
 // Logo Lightbox Profile View Modal
 function initLogoLightbox() {
@@ -181,11 +304,12 @@ function renderProducts(category = 'all') {
   }
 
   container.innerHTML = filtered.map(product => `
-    <article class="product-card" data-category="${product.category}">
-      <div class="product-img-wrapper">
+    <article class="product-card" data-id="${product.id}" data-category="${product.category}">
+      <div class="product-img-wrapper" style="cursor: pointer;" title="Haz clic para ampliar y deslizar afiches">
         <img src="${product.image}" alt="${product.name}" loading="lazy">
         <span class="product-tag-cat">${product.badge || product.category.toUpperCase()}</span>
       </div>
+
       <div class="product-body">
         <h3 class="product-title">${product.name}</h3>
         <p class="product-strains">🌿 ${product.strains}</p>
