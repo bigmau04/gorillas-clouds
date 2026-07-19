@@ -1078,20 +1078,18 @@ img {
     display: none;
   }
 
-  .nav-actions .btn-nav-ig span,
-  .nav-actions .btn-nav-wa span {
-    display: none; /* Icon-only on small header to prevent overflow */
-  }
-
-  .btn-nav-ig, .btn-nav-wa {
-    padding: 0.5rem;
-    min-height: 36px;
-    width: 36px;
-    justify-content: center;
+  .nav-actions {
+    display: none; /* Hide header buttons on mobile to avoid overlapping logo & hamburger icon */
   }
 
   .nav-toggle-btn {
     display: flex;
+    flex-shrink: 0;
+  }
+
+  .navbar {
+    padding: 0.5rem 0.95rem;
+    gap: 0.5rem;
   }
 
   .footer-grid {
@@ -1112,6 +1110,7 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
 
 @media (max-width: 480px) {
   .header-wrapper {
