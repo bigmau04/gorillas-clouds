@@ -97,11 +97,43 @@ const PRODUCTS = [
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
   initAgeModal();
+  initLogoLightbox();
   renderProducts('all');
   initFilterButtons();
   initMobileMenu();
   initSmoothScroll();
 });
+
+// Logo Lightbox Profile View Modal
+function initLogoLightbox() {
+  const logoImg = document.querySelector('.brand-logo-img');
+  const modal = document.getElementById('logoLightboxModal');
+  const closeBtn = document.getElementById('btnCloseLogoLightbox');
+
+  if (!logoImg || !modal) return;
+
+  logoImg.style.cursor = 'pointer';
+  logoImg.title = 'Ver logo en grande';
+
+  logoImg.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    modal.classList.remove('hidden');
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
+}
+
 
 // Age Verification Modal (+18)
 function initAgeModal() {
