@@ -581,14 +581,21 @@ img {
   overflow: hidden;
   position: relative;
   box-shadow: 0 12px 25px rgba(15, 57, 43, 0.1);
-  aspect-ratio: 4 / 3;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
 }
 
 .hero-image-frame img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
 }
+
 
 .floating-tag {
   position: absolute;
@@ -807,19 +814,25 @@ img {
 .product-img-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 75%;
+  padding-top: 0;
+  height: 390px;
   overflow: hidden;
-  background: #EBF3EE;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(15, 57, 43, 0.05);
 }
 
 .product-img-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
 }
+
 
 .product-tag-cat {
   position: absolute;

@@ -6,93 +6,96 @@
 const WHATSAPP_NUMBER = "573236587684";
 const INSTAGRAM_URL = "https://www.instagram.com/destimtr.oficial/";
 
-// Product Catalog Data
+// Product Catalog Data - Extracted directly from image flyers
 const PRODUCTS = [
   {
     id: 1,
-    name: "Gorilla Vapor Disposable 2G - THC-X + Live Resin",
-    category: "disposables",
-    price: 180000,
-    formattedPrice: "$180.000 COP",
-    strains: "Sativa / Híbrida - Gelato Mint",
-    cannabinoids: ["THC-X", "Live Resin", "Terpenos Botánicos"],
-    desc: "Vape desechable recargable de 2 gramos. Extracción en frío de resina viva con destilado de alta densidad y sabor terpénico natural.",
+    name: "Batería All In Vape 510 - Pantalla LED & Control Digital",
+    category: "cartuchos",
+    price: 50000,
+    formattedPrice: "$50.000 COP",
+    kitPrice: "Kit con Cápsula: $90.000 COP",
+    strains: "Universal 510 - Control Digital",
+    cannabinoids: ["650mAh Batería", "Pantalla LED", "Control Digital Voltaje"],
+    desc: "Batería 650mAh con indicador LED de carga y voltaje regulable. Compatible con todos los cartuchos 510. Protección sobrecarga.",
     image: "img/destilado-1.jpg",
     badge: "Más Vendido 🔥"
   },
   {
     id: 2,
-    name: "Live Resin Pod 1G - THCV Pure Energy",
+    name: "Kik Zombie Blend 4.2ML - Live Resin + Liquid Diamonds",
     category: "live-resin",
-    price: 140000,
-    formattedPrice: "$140.000 COP",
-    strains: "Sativa Lúcida - Super Lemon Haze",
-    cannabinoids: ["THCV", "CBD", "Terpenos Vivos"],
-    desc: "Formulado para un enfoque mental claro y energía limpia sin ansiedad ni letargo. Ideal para consumo diurno activo.",
+    price: 160000,
+    formattedPrice: "$160.000 COP",
+    strains: "Indica Premium - Kalibloom Zombie",
+    cannabinoids: ["THCA Liquid Diamonds", "Live Resin CDT", "HHCP / THCP"],
+    desc: "Dispositivo recargable de 4.2ML de máxima capacidad. Extracción de resina viva con diamantes líquidos y perfil terpénico CDT.",
     image: "img/destilado-2.jpg",
-    badge: "Efecto Lúcido ✨"
+    badge: "4.2ML Potente 💎"
   },
   {
     id: 3,
-    name: "Cartucho 510 Thread 1G - THC Ultra Clear",
+    name: "Live Resin Cartridge Delta 9 - Terpenos Naturales",
     category: "cartuchos",
     price: 120000,
     formattedPrice: "$120.000 COP",
-    strains: "Indica Profunda - Zkittlez Cloud",
-    cannabinoids: ["THC 95%", "Terpenos Orgánicos"],
-    desc: "Cartucho universal 510 con destilado triple filtrado de alta pureza. Relajación física intensa y vapor denso de aroma dulce.",
+    strains: "Espectro Completo - Terps Vivos",
+    cannabinoids: ["Delta 9 Pure", "Live Resin", "Sin Rellenos"],
+    desc: "Cartucho 510 de aceite puro sin aditivos ni agentes de corte. Extracción premium de terpenos naturales de sabor intenso.",
     image: "img/destilado-3.jpg",
-    badge: "Alta Potencia 💎"
+    badge: "Aceite Puro ✨"
   },
   {
     id: 4,
-    name: "Destilado Concentrado Jar 3G - Pure Diamonds & Sauce",
-    category: "concentrados",
-    price: 220000,
-    formattedPrice: "$220.000 COP",
-    strains: "Híbrida Premium - Gorilla Glue #4",
-    cannabinoids: ["THC-X", "CBN", "Live Terps"],
-    desc: "Salsa de resina viva con cristales concentrados para dabs o recarga. Máximo perfil aromático y potencia de espectro completo.",
+    name: "Batería Yocan Kodo 510 - Carga Rápida USB-C",
+    category: "cartuchos",
+    price: 70000,
+    formattedPrice: "$70.000 COP",
+    kitPrice: "Kit con Cápsula: $120.000 COP",
+    strains: "3 Niveles de Voltaje Variable",
+    cannabinoids: ["Carga USB-C", "Diseño Ultra Compacto", "Conexión 510"],
+    desc: "Batería ultra portátil para extracciones. 3 niveles de potencia regulable, encendido rápido de 5 clics y puerto USB-C.",
     image: "img/destilado-4.jpg",
-    badge: "Edición Limitada 👑"
+    badge: "Carga Rápida ⚡"
   },
   {
     id: 5,
-    name: "Gorilla Gummies Infused 500mg - THC + CBN Night",
-    category: "edibles",
-    price: 95000,
-    formattedPrice: "$95.000 COP",
-    strains: "Fruit Punch / Mango Wild",
-    cannabinoids: ["THC", "CBN", "CBG"],
-    desc: "Gomas artesanales de lenta absorción para un descanso reparador y alivio muscular nocturno. 10 unidades de 50mg.",
+    name: "Green Dragon Live Resin Cartridge 1G",
+    category: "live-resin",
+    price: 110000,
+    formattedPrice: "$110.000 COP",
+    strains: "Híbrida - Green Dragon Strain",
+    cannabinoids: ["Live Resin 100%", "Terpenos Botánicos"],
+    desc: "Perfil terpénico concentrado de resina viva. Sabor aromático natural con efecto relajante muscular de larga duración.",
     image: "img/destilado-5.jpg",
-    badge: "Descanso Profundo 🌙"
+    badge: "Resina Viva 🌿"
   },
   {
     id: 6,
-    name: "Disposable Heavy Hitter 3G - THC-X Dual Strain",
+    name: "Disposable Tangie Live Resin 2G",
     category: "disposables",
-    price: 240000,
-    formattedPrice: "$240.000 COP",
-    strains: "Doble Boquilla: Indica + Sativa",
-    cannabinoids: ["THC-X", "THCV", "Live Resin"],
-    desc: "Sistema dual de vapeo. Cambia entre efecto energizante diurno y relajante nocturno en un solo dispositivo premium.",
+    price: 150000,
+    formattedPrice: "$150.000 COP",
+    strains: "Sativa Energizante - Tangie Citrus",
+    cannabinoids: ["Live Resin 2G", "Sativa Lúcida", "Recargable"],
+    desc: "Vape desechable recargable de 2 gramos sabor cítrico dulce Tangie. Enfoque diurno activo y elevación lúcida.",
     image: "img/destilado-6.jpg",
-    badge: "Innovación 🚀"
+    badge: "Sativa Citrus 🍊"
   },
   {
     id: 7,
-    name: "Pack Destila2 Mtr Starter Kit - Vape 2G + Cart 1G",
+    name: "Dazed Titan 2000mg (2ML) - Delta 8 / Delta 10 Live Resin",
     category: "disposables",
-    price: 270000,
-    formattedPrice: "$270.000 COP",
-    strains: "Surtido Seleccionado",
-    cannabinoids: ["THC", "Live Resin", "THC-X"],
-    desc: "Combo especial de iniciación con envío discreto gratuito a nivel nacional. Incluye accesorios y lanyard exclusivo Gorillas Clouds.",
+    price: 105000,
+    formattedPrice: "$105.000 COP",
+    strains: "Variedad: Oreoz / Apple Fritter",
+    cannabinoids: ["2000mg THC", "Coil Cerámico", "Delta 8 / Delta 10"],
+    desc: "Dispositivo recargable 2ML con resistencia de cerámica para vapor denso y sabor puro sin quemados.",
     image: "img/destilado-7.jpg",
-    badge: "Oferta Combo 🎁"
+    badge: "Coil Cerámico 💨"
   }
 ];
+
 
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
@@ -191,14 +194,16 @@ function renderProducts(category = 'all') {
           ${product.cannabinoids.map(c => `<span style="background: rgba(16,185,129,0.1); color: var(--accent-emerald); font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">${c}</span>`).join('')}
         </div>
         <div class="product-price-row">
-          <span class="product-price">${product.formattedPrice}</span>
+          <div>
+            <span class="product-price">${product.formattedPrice}</span>
+            ${product.kitPrice ? `<span style="display:block; font-size:0.75rem; color:var(--accent-gold-dark); font-weight:700;">${product.kitPrice}</span>` : ''}
+          </div>
           <button onclick="orderProductViaWhatsApp('${product.name}', '${product.formattedPrice}')" class="btn-order-wa">
-            <i class="fab fa-whatsapp">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            </i>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             Pedir
           </button>
         </div>
+
       </div>
     </article>
   `).join('');
